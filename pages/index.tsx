@@ -18,6 +18,21 @@ const subtitleStyle = {
 const GITHUB_CLIENT_ID = process.env.NEXT_PUBLIC_GITHUB_APP_CLIENT_ID
 const GITHUB_SESSION_USERNAME_KEY = 'draw-dino:github-username'
 
+const month = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December',
+]
+
 const Home: FC = () => {
   const [dinoName, setDinoName] = useState<string>('')
   const [progress, setProgress] = useState<number>(0)
@@ -309,7 +324,7 @@ const Home: FC = () => {
             submitting a pull request on GitHub.
           </p>
           <p>
-            The first step is to make our dino. Don't worry about setup—we've
+            The first step is to make our dino. Don't worry about setup — we've
             included a full dino-drawing-a-tron below for you to use. Just click
             "next" and make that dino! You're also free to use a photo.
           </p>
@@ -343,9 +358,9 @@ const Home: FC = () => {
           <Step revealed={index <= progress}>
             <Split index={index} progress={progress} setProgress={setProgress}>
               <p>
-                Now you'll need permission to edit the dinos repo. We've just
-                sent you an invite, and depending on your settings, it will be
-                auto-accepted or you'll need to{' '}
+                While you don't need permission to PR to the dinos repo. We've
+                just sent you an invite, and depending on your settings, it will
+                be auto-accepted or you'll need to{' '}
                 <a
                   target="_blank"
                   href="https://github.com/orgs/hackclub/invitation"
@@ -402,6 +417,28 @@ const Home: FC = () => {
             name" box.
           </p>
           <p>Click "Create Fork"!</p>
+        </Split>
+      </Step>
+      {console.log(index++)}
+
+      <Step revealed={index <= progress}>
+        <Split
+          image="steps/folder.gif"
+          imageLink="steps/folder.mp4"
+          subtitle="Find your folder"
+          index={index}
+          progress={progress}
+          setProgress={setProgress}
+        >
+          <p>You are now on your own personal copy of the repository!</p>
+          <p>
+            Click on the Folder for the current year,
+            <Selectable>{new Date().getFullYear()}</Selectable>
+          </p>
+          <p>
+            Then click on the current month,
+            <Selectable>{month[new Date().getMonth()]}</Selectable>
+          </p>
         </Split>
       </Step>
       {console.log(index++)}
