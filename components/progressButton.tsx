@@ -9,7 +9,13 @@ interface ProgressButtonProps {
   [key: string]: any
 }
 
-const ProgressButton: FC<ProgressButtonProps> = ({ children, setProgress, index, progress, ...props }) => {
+const ProgressButton: FC<ProgressButtonProps> = ({
+  children,
+  setProgress,
+  index,
+  progress,
+  ...props
+}) => {
   const active = index == progress
 
   const onClick = () => {

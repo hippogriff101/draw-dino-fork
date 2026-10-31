@@ -46,7 +46,12 @@ export default async function hcaCallback(
   }
 
   const { code, state } = req.query
-  if (!code || !state || typeof code !== 'string' || typeof state !== 'string') {
+  if (
+    !code ||
+    !state ||
+    typeof code !== 'string' ||
+    typeof state !== 'string'
+  ) {
     authFailure(res, 'Missing code or state')
     return
   }
@@ -65,7 +70,10 @@ export default async function hcaCallback(
     return
   }
 
-  if (Date.now() - Number(savedState.createdAt) > HCA_STATE_TTL_SECONDS * 1000) {
+  if (
+    Date.now() - Number(savedState.createdAt) >
+    HCA_STATE_TTL_SECONDS * 1000
+  ) {
     authFailure(res, 'Expired auth state cookie')
     return
   }

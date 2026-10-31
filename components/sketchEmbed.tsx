@@ -32,7 +32,13 @@ const continueMessage = {
   right: 0,
 }
 
-const SketchEmbed: FC<SketchEmbedProps> = ({ setDinoName, progress, index, setProgress, filePrefix }) => {
+const SketchEmbed: FC<SketchEmbedProps> = ({
+  setDinoName,
+  progress,
+  index,
+  setProgress,
+  filePrefix,
+}) => {
   const iframeRef = useRef<HTMLIFrameElement>(null)
 
   useEffect(() => {

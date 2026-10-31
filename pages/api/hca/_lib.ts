@@ -73,7 +73,10 @@ interface StateValue {
   createdAt: number
 }
 
-export function createSignedStateCookie(value: StateValue, secret: string): string {
+export function createSignedStateCookie(
+  value: StateValue,
+  secret: string
+): string {
   const payload = base64UrlEncode(JSON.stringify(value))
   const signature = signPayload(payload, secret)
   return `${payload}.${signature}`
@@ -94,7 +97,10 @@ export function readCookie(req: NextApiRequest, name: string): string {
   return ''
 }
 
-export function verifySignedStateCookie(token: string, secret: string): StateValue | null {
+export function verifySignedStateCookie(
+  token: string,
+  secret: string
+): StateValue | null {
   if (!token) return null
 
   const [payload, signature] = token.split('.')
@@ -122,7 +128,11 @@ interface CookieOptions {
   secure?: boolean
 }
 
-export function serializeCookie(name: string, value: string, options: CookieOptions = {}): string {
+export function serializeCookie(
+  name: string,
+  value: string,
+  options: CookieOptions = {}
+): string {
   const attrs = [`${name}=${encodeURIComponent(value)}`]
 
   if (options.maxAge != null) attrs.push(`Max-Age=${options.maxAge}`)
@@ -151,7 +161,13 @@ interface TokenResponse {
   expires_in: number
 }
 
-export async function exchangeCodeForTokens({ code, redirectUri }: { code: string; redirectUri: string }): Promise<TokenResponse> {
+export async function exchangeCodeForTokens({
+  code,
+  redirectUri,
+}: {
+  code: string
+  redirectUri: string
+}): Promise<TokenResponse> {
   const discovery = await getDiscovery()
   const response = await fetch(discovery.token_endpoint, {
     method: 'POST',
@@ -175,7 +191,9 @@ export async function exchangeCodeForTokens({ code, redirectUri }: { code: strin
   return response.json()
 }
 
-export async function fetchUserInfo(accessToken: string): Promise<Record<string, any>> {
+export async function fetchUserInfo(
+  accessToken: string
+): Promise<Record<string, any>> {
   const discovery = await getDiscovery()
   if (!discovery.userinfo_endpoint) return {}
 

@@ -285,8 +285,7 @@ const Intro: FC<IntroProps> = ({
           {needsGithubManual && (
             <div>
               <p className="github-hint">
-                Type your GitHub username to
-                continue:
+                Type your GitHub username to continue:
               </p>
               <input
                 type="text"
